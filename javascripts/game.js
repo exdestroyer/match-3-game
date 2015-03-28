@@ -24,7 +24,7 @@ var moveable =false;
 $(document).ready(function() {
 	init();
 	animalChain();
-	beforeBegin();
+	//beforeBegin();
 });
 
 //Animal Class
@@ -37,12 +37,12 @@ function Animal(color, tileX, tileY) {
 	//JQ is the HTML elem of Animal
 	this.JQ = $("<div></div>");
 	this.JQ.addClass("animal").addClass(animalColor[this.color]);
-	this.JQ.css("top", (tileHeight * this.tileY + "px")).css("left", (tileWidth * this.tileX + "px"));
+	this.JQ.css("top", (310-tileHeight * this.tileY + "px")).css("left", (tileWidth * this.tileX + "px"));
 
 	//move function, simply move the Animal
 	this.move = function(tileX, tileY) {
 		var tarLeft = ((tileX > that.tileX) ? "+=" : "-=") + Math.abs(tileX - that.tileX) * tileWidth + "px";
-		var tarTop = ((tileY > that.tileY) ? "+=" : "-=") + Math.abs(tileY - that.tileY) * tileHeight + "px";
+		var tarTop = ((tileY > that.tileY) ? "-=" : "+=") + Math.abs(tileY - that.tileY) * tileHeight + "px";
 	
 		that.JQ.animate({
 			left : tarLeft,
@@ -63,7 +63,7 @@ function Animal(color, tileX, tileY) {
 		that.tileX = tileX;
 		that.tileY = tileY;
 		animalMatrix[tileX][tileY] = that;
-	
+	that.JQ.html("x:" + tileX + "<br/>y:" + tileY);
 	};
 
 	//change select status
@@ -218,27 +218,29 @@ function animalChain() {
 	for ( i = 0; i < tileNumX; i++) {
 		flagMatrix[i] = new Array();
 	}
-	for ( x = 0; x < tileNumX; x++) {
-		for ( y = 0; y < tileNumY; y++) {
+	for ( x = tileNumX-1; x > 0; x--) {
+		for ( y = tileNumY-1; y > 0; y--) {
 			var repeatX = 0;
 			var repeatY = 0;
-			if (x > 0) {
-				repeatX = (animalMatrix[x][y].color == animalMatrix[x-1][y].color) ? flagMatrix[x-1][y].repeatX + 1 : 0;
+			if (x < tileNumX-1) {
+				
+				repeatX = (animalMatrix[x][y].color == animalMatrix[x+1][y].color) ? flagMatrix[x+1][y].repeatX + 1 : 0;
 				if (repeatX > 1) {
 					var i = repeatX;
 					
 					for (i; i > 0; i--) {
-						flagMatrix[x-i][y].repeatX = repeatX;
+						flagMatrix[x+i][y].repeatX = repeatX;
 					}
 				}
 			}
-			if (y > 0) {
-				repeatY = (animalMatrix[x][y].color == animalMatrix[x][y - 1].color) ? flagMatrix[x][y - 1].repeatY + 1 : 0;
+			if (y < tileNumY-1) {
+				console.log(x,y)
+				repeatY = (animalMatrix[x][y].color == animalMatrix[x][y + 1].color) ? flagMatrix[x][y + 1].repeatY + 1 : 0;
 				if (repeatY > 1) {
 					var i = repeatY;
 					
 					for (i; i > 0; i--) {
-						flagMatrix[x][y - i].repeatY = repeatY;
+						flagMatrix[x][y + i].repeatY = repeatY;
 					}
 				}
 			}
@@ -248,8 +250,9 @@ function animalChain() {
 		}
 	}
 	var flag = false;
-	 for ( x = 0; x < tileNumX; x++) {
-	 	for ( y = 0; y < tileNumY; y++) {
+	 for ( x = tileNumX-1; x > 0; x--) {
+	 	for ( y = tileNumY-1; y > 0; y--) {
+	 		
 	 		if (flagMatrix[x][y].repeatX > 1 || flagMatrix[x][y].repeatY > 1) {
 	 			
 	 			animalMatrix[x][y].JQ.fadeOut(fadeTime); 			
@@ -330,9 +333,9 @@ var flagMatrix = new Array();
 };
 //make Animals falling down
 function gravity() {
-	for ( x = 0; x < tileNumX; x++) {
+	for ( x = tileNumX -1; x > 0; x--) {
 		var hole = 0;
-		for ( y = tileNumY - 1; y >= 0; y--) {
+		for ( y = 0; y <= tileNumY - 1; y++) {
 			if (!animalMatrix[x][y]) {
 				hole++;
 
@@ -343,7 +346,9 @@ function gravity() {
 
 		for ( i = 0; i < hole; i++) {
 			var color = Math.floor(Math.random() * 4);
+			
 			var animal = new Animal(color, x, i-hole);
+		
 			$("#grid").append(animal.JQ);
 			animal.JQ.css("display","none");
 			animal.reposition(x,i);

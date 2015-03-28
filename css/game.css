@@ -2,9 +2,19 @@
 @font-face{
 font-family:'stencil';
 src: url('../fonts/STENCIL.TTF');
-src: url('../fonts/STENCIL.eot');
+src: url('../fonts/STENCIL.eot'),
+url('../fonts/STENCIL-webfont.eot?#iefix') format('embedded-opentype'),
+        /* url('../fonts/STENCIL-webfont.woff2') format('woff2'),*/
+         url('../fonts/STENCIL-webfont.woff') format('woff'),
+         url('../fonts/STENCIL-webfont.ttf') format('truetype'),
+         url('../fonts/STENCIL-webfont.svg#stencilregular') format('svg');
 }
-
+a{
+  position: relative;
+  text-decoration: none;
+  margin: 0 auto;
+  left: 290px;
+}
 .animal {
 	position: absolute;
 	cursor: pointer;
@@ -32,7 +42,18 @@ src: url('../fonts/STENCIL.eot');
 .white {
 	background-image: url(../images/zImg_3.png);
 }
-
+.hungry {
+	background-image: url(../images/zImg_0_Hungry.png) !important;
+	
+}
+.fat {
+	background-image: url(../images/zImg_0_Fat.png) !important;
+	
+}
+.expo {
+	background-image: url(../images/explosion.gif) !important;
+	
+}
 .head{
 	font-family: stencil;
 }
@@ -68,31 +89,19 @@ src: url('../fonts/STENCIL.eot');
 
 #moves{
 	top: 58px;
-	left: 662px;
+	right: 39px;
+	float: right;
 }
 
-#progress{
-	float: left;
-	position: relative;
-	top: 197px;
-	left: 125px;
-	/*width: 52px;*/
-	margin: 0 auto;
-	height: 48px;
-	background: url(../images/CompletedProgress.png) no-repeat left;
-	overflow: hidden;
-}
 
-#grid{
-	left: 117px;
-	top: 150px;
-	width:505px;
-	height:383px;
+
+.grid{
+
+	
 	position:relative;
 	cursor: pointer;
 }
-
-#grid div{
+.grid div{
 	width:65px;
 	height:59px;
 	position:absolute;
@@ -133,3 +142,74 @@ src: url('../fonts/STENCIL.eot');
 	margin: 0 auto;
 }
 
+#record {
+	float: left;
+	position: absolute;
+/*	top: 197px;
+	left: 125px;*/
+	width: 0%;
+	margin: 0 auto;
+	height: 100%;
+	background: url(../images/CompletedProgress.png) no-repeat left;;
+	overflow: hidden;
+}
+#record::before {
+  content:attr(some-attribute-name);
+  position: absolute;
+  top: 34px;
+  color: #ffffff;
+      margin-left:-43px;
+  margin-top:-25px;
+  left: 248px;
+  font-size: 25px;
+  font-family: microsoft yahei;
+  font-weight: bold;
+}
+
+#progress {
+	float: left;
+	position: relative;
+	top: 197px;
+	left: 125px;
+	width: 476px;
+	/*margin: 0 auto;*/
+	height: 48px;
+	background: none;
+	/*overflow: hidden;*/
+	  color: #7498d6;
+
+  font-size: 25px;
+  font-family: microsoft yahei;
+  font-weight: bold;
+}
+#progress::before {
+  content: attr(some-attribute-name);
+  position: absolute;
+  top: 34px;
+   margin-left:-43px;
+  margin-top:-25px;
+  color: #7498d6;
+  left: 248px;
+  font-size: 25px;
+  font-family: microsoft yahei;
+  font-weight: bold;
+}
+.sound {
+	cursor: pointer;
+  position: absolute;
+  left: 645px;
+  width: 50px;
+  top: 576px;
+  height: 50px;
+  background-image: url(../images/NoSound.png)
+}
+.footer{
+  position: relative;
+  margin: 0 auto;
+  width: 754px;
+
+  /* top: 50px; */
+  margin-top: 10px;
+  font-family: microsoft yahei;
+  /* text-decoration: none; */
+}

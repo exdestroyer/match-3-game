@@ -4,29 +4,34 @@
 		<title>Game Test</title>
 		<meta http-equiv="Content-type" content="text/html, charset=utf-8">
 		<link rel="stylesheet" href="css/game.css"/></link>
+		<link rel="stylesheet" href="css/level1.css"/></link>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> 
 		<script type="text/javascript" src="javascripts/jquery-1.11.1.min.js"></script>
-		<script type="text/javascript" src="javascripts/game.js"></script>
+
 	</head>
 
-	<body>
+	<body id="bgs">
 		<div id="stage" class="stage">
 			<div class="head">
 				<div id="lives"	class="number">3</div>
 				<div id="level"	class="number">1</div>
 				<div id="moves"	class="number">10</div>
 			</div>
-			<div id="grid">
+			<div class="grid" id="grid1" >
+				
+			</div>			
+			<div class="grid" id="grid2" style="display:none">
 				
 			</div>
-			<div id="progress">
-				
-			</div>
-		</div>
+			<div id="progress" some-attribute-name="0/100">
+			   <div class="score" id='record' some-attribute-name="0/100"></div>
 
+			</div>
+				
+				<div class="sound off" id="on" ></div>
+		</div>
+			<div class="footer"><a href="http://www.exdestroyer.com/" target="_blank">Dev by EXDestroyer</a></div>
 
 	</body>
-	<script>
-
-	</script>
+		<script type="text/javascript" src="javascripts/level1.js"></script>
 </html>
